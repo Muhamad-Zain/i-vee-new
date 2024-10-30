@@ -1,0 +1,11 @@
+.bgHero{
+    @apply h-screen relative w-full flex justify-center items-center;
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    
+}
+.bgHero::after {
+    content: '';
+    @apply bg-black bg-opacity-60 absolute  h-screen z-10 w-full top-0
+}
