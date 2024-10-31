@@ -1,8 +1,9 @@
 .bgHero{
-    @apply h-screen relative w-full flex justify-center items-center;
+    @apply  relative w-full flex justify-center items-center;
     background-size: cover;
     background-position: center;
     object-fit: cover;
+    height: calc(var(--vh, 1vh) * 100);
     
 }
 .bgHero::after {

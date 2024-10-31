@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types'
 import style from './style.module.css'
 
-export default function Page1(params) {
+export default function Page1({btn}) {
     return(
         // <section className='relative  max-w-[1400]'>
         // <main className=' z-50 w-full  absolute'>
@@ -12,7 +13,7 @@ export default function Page1(params) {
                 <div className='mt-[40vh]'>
                     <p className='text-sm'>kpd Bpk/Ibu/Saudara/i</p>
                     <h3 className='font-bold py-3 sm:py-5 playfair'>Tamu Undangan</h3>
-                    <button className='bg-black bg-opacity-20 p-2 px-4 border border-white rounded-full playfair'>Buka Undangan</button>
+                    <button onClick={btn} className='bg-black bg-opacity-20 p-2 px-4 border border-white rounded-full playfair'>Buka Undangan</button>
                     <p className='text-xs italic  my-1'>Mohon maaf apabila ada kesalahan penulisan nama/gelar</p>
                 </div>
             </div>
@@ -20,4 +21,8 @@ export default function Page1(params) {
         // </main>
         // </section>
     )
+}
+
+Page1.propTypes = {
+    btn: PropTypes.func.isRequired
 }
