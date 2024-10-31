@@ -2,6 +2,8 @@ import style from './style.module.css'
 
 export default function Page1(params) {
     return(
+        <section className='relative  max-w-[1400]'>
+        <main className=' z-50 w-full  absolute'>
         <section style={{backgroundImage : 'url(/img/image.png)'}} className= {style.bgHero}>
             <div className='relative z-20 w-full  text-center'>
                 <h3 className='tracking-[0.1em] '>The Wedding Of</h3>
@@ -14,6 +16,8 @@ export default function Page1(params) {
                     <p className='text-xs italic  my-1'>Mohon maaf apabila ada kesalahan penulisan nama/gelar</p>
                 </div>
             </div>
+        </section>
+        </main>
         </section>
     )
 }

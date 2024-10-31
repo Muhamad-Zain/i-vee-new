@@ -1,9 +1,15 @@
 'use client'
+import { useEffect, useState } from "react";
 import Countdown from "react-countdown";
 
 
 export default function Page5(params) {
     const data = '2024-12-09'
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true); // Set state untuk render hanya di klien
+    }, []);
 
     const renderer = ({days, hours, minutes, seconds, completed }) => {
         if (completed) {
@@ -16,25 +22,25 @@ export default function Page5(params) {
               <div className="rounded-lg bg-white bg-opacity-10 w-[4rem] h-[3.5rem]  flex justify-center items-center">
                    <div className="leading-6 text-xl font-bold">
                       {days}
-                      <p className="text-sm">Hari</p>
+                      <p className="text-sm">Days</p>
                    </div>
               </div>
               <div className=" rounded-lg bg-white bg-opacity-15 w-[4rem] h-[3.5rem]  flex justify-center items-center">
                    <div className="leading-6 text-xl font-bold">
                       {hours}
-                      <p className="text-sm">Jam</p>
+                      <p className="text-sm">Hours</p>
                    </div>
               </div>
               <div className=" rounded-lg bg-white bg-opacity-15 w-[4rem] h-[3.5rem]  flex justify-center items-center">
                    <div className="leading-6 text-xl font-bold">
                       {minutes}
-                      <p className="text-sm">menit</p>
+                      <p className="text-sm">Minutes</p>
                    </div>
               </div>
               <div className=" rounded-lg bg-white bg-opacity-15 w-[4rem] h-[3.5rem]  flex justify-center items-center">
                    <div className="leading-6 text-xl font-bold">
                       {seconds}
-                      <p className="text-sm">Detik</p>
+                      <p className="text-sm">Seconds</p>
                    </div>
               </div>
             </div>
@@ -45,7 +51,10 @@ export default function Page5(params) {
         <section>
             <div className="text-center playfair text-3xl sm:text-5xl">
                 <h3>COUNDOWN ACARA</h3>
-                <Countdown date={data} renderer={renderer} />
+                {
+                  isClient && 
+                  <Countdown date={data} renderer={renderer} />
+                }
                 <button className="py-2 px-4 rounded-full bg-white bg-opacity-10">SAVE DATE</button>
             </div>
         </section>
