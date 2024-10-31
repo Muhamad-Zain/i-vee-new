@@ -31,3 +31,15 @@ body {
   /* font-weight: <weight>; */
   /* font-style: normal; */
 }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg); /* Mulai dari 0 derajat */
+  }
+  to {
+    transform: rotate(360deg); /* Berputar hingga 360 derajat */
+  }
+}
+.rotate-icon {
+  animation: spin 2s linear infinite; /* Berputar selama 2 detik secara linear dan terus menerus (infinite) */
+}

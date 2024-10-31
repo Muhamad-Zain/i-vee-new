@@ -1,5 +1,5 @@
 .bgHero{
-    @apply  relative w-full flex justify-center items-center;
+    @apply  relative w-full z-30 flex justify-center items-center;
     background-size: cover;
     background-position: center;
     object-fit: cover;
@@ -8,5 +8,5 @@
 }
 .bgHero::after {
     content: '';
-    @apply bg-black bg-opacity-60 absolute  h-screen z-10 w-full top-0
+    @apply bg-black bg-opacity-60 absolute  z-10 w-full top-0 h-full
 }
