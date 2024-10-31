@@ -74,9 +74,9 @@ export default function App(params) {
             <Page8 />
             <Page9 />
             <button onClick={toggleMusic} 
-                            className={`w-10 h-10 rounded-full border border-white flex justify-center items-center bg-opacity-50 fixed bottom-16 left-5 z-20 ${bgToggle}`}>
-                            <GiMusicSpell className='fill-current text-white rotate-icon' size={25} />
-                        </button>
+                className={`w-10 h-10 rounded-full border border-white flex justify-center items-center bg-opacity-50 fixed bottom-16 left-5 z-20 ${bgToggle}`}>
+                    <GiMusicSpell className='fill-current text-white rotate-icon' size={25} />
+            </button>
             <audio id="music">
                 <source src='/melodi.mp3' type="audio/mp3" />
             </audio>

@@ -14,7 +14,7 @@ export default function Page3(params) {
                 </div>
             </div>
             <div className='relative z-10  p-5'>
-                <h3 className='text-2xl playfair italic font-bold' style={{textShadow: '2px 2px black'}}>M. Zainul Qirom, S.kom</h3>
+                <h3 className='text-2xl playfair italic font-bold' style={{textShadow: '2px 2px black'}}>Your Name</h3>
                 <p className='italic'>Putra Dari bapak Lorem <br /> dan Ibu Ipsum </p>
             </div>
             <div className='flex justify-center items-center py-5 text-5xl playfair'>
@@ -33,9 +33,9 @@ export default function Page3(params) {
                 
             </div>
             <div className='relative z-10 text-end p-5'>
-                        <h3 className='text-2xl playfair italic font-bold'  style={{textShadow: '2px 2px black'}}>Isna Ayu Mu'arofah, S.kom </h3>
-                        <p className='italic'>Putri Dari bapak Lorem <br /> dan Ibu Ipsum </p>
-                    </div>
+                <h3 className='text-2xl playfair italic font-bold'  style={{textShadow: '2px 2px black'}}>Your Name</h3>
+                <p className='italic'>Putri Dari bapak Lorem <br /> dan Ibu Ipsum </p>
+            </div>
         </section>
     )
 }
