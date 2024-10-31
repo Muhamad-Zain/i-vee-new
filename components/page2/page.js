@@ -2,7 +2,7 @@ import style from './style.module.css'
 
 export default function Page2(params) {
     return(
-        <section className='sm:px-20 sm:py-10'>
+        <section className='sm:px-20 sm:py-20'>
             <div style={{backgroundImage: 'url(/img/image.png)'}} className={`${style.bg} w-full h-screen sm:h-[80vh] sm:shadow-lg  sm:shadow-black overflow-hidden sm:rounded-3xl`}>
                 <div className={`${style.wrap} relative z-10 h-screen sm:h-[80vh]`}>
                     <div className='text-center sm:text-start sm:ml-10  p-10 relative z-10 '>

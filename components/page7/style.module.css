@@ -1,16 +1,15 @@
-.rsvp{
-    @apply relative w-[90%] m-auto p-5 rounded-2xl;
+.comment{
+    @apply w-[90%] m-auto relative p-5 rounded-2xl overflow-hidden;
     background-position: center;
     background-size: cover;
     object-fit: cover;
-    overflow: hidden;
 }
-.rsvp::after{
+.comment::after{
     content: '';
     position: absolute;
-    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
     top: 0;
     left: 0;
 }

@@ -1,5 +1,5 @@
 .bgCardMen{
-    @apply relative w-[80%] sm:max-w-[40rem] h-96 rounded-tl-[30%] rounded-br-[30%] flex place-content-end items-end text-end p-10 sm:p-12 shadow-xl shadow-black overflow-hidden;
+    @apply relative w-[80%] sm:max-w-[40rem] h-96 rounded-tl-[30%] rounded-br-[30%] flex place-content-end items-end text-end p-10 sm:p-12 shadow-xl  shadow-black overflow-hidden;
     background-size: cover;
     background-position: center;
     object-fit: cover;
@@ -28,12 +28,12 @@
     text-shadow: 1px 1px white;
 }
 .bgCardGrils{
-    @apply relative w-[80%] sm:max-w-[40rem] h-96 rounded-tr-[30%] rounded-bl-[30%] flex place-content-end items-end text-end p-10 sm:p-12 shadow-xl shadow-black overflow-hidden;
+    @apply relative w-[80%] sm:max-w-[40rem] h-96 rounded-tr-[30%] rounded-bl-[30%] flex place-content-start items-end text-start p-10 sm:p-12 shadow-xl shadow-black overflow-hidden;
     background-size: cover;
     background-position: center;
     object-fit: cover;
-
 }
+
 .bgCardGrils::after{
     content: '';
     position: absolute;
