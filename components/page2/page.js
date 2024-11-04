@@ -1,14 +1,27 @@
+import { useEffect, useState } from 'react'
 import style from './style.module.css'
+import { fetchImage } from '../data/firebase'
+import PropTypes from 'prop-types'
 
-export default function Page2(params) {
+export default function Page2({data}) {
+    const [image, setImage] = useState('')
+
+    useEffect(()=> {
+        const getImage = async () => {
+            const url = await fetchImage('315c3e89af9e7f5a9fcd456420609df9.jpg')
+            setImage(url)
+        }
+        getImage()
+    },[])
+
     return(
         <section className='sm:px-20 sm:py-20'>
-            <div style={{backgroundImage: 'url(/img/image.png)'}} className={`${style.bg} w-full h-screen sm:h-[80vh] sm:shadow-lg  sm:shadow-black overflow-hidden sm:rounded-3xl`}>
+            <div style={{backgroundImage: `url(${image})`}} className={`${style.bg} w-full h-screen sm:h-[80vh] sm:shadow-lg  sm:shadow-black overflow-hidden sm:rounded-3xl`}>
                 <div className={`${style.wrap} relative z-10 h-screen sm:h-[80vh]`}>
                     <div className='text-center sm:text-start sm:ml-10  p-10 relative z-10 '>
                         <p>The Wedding Of</p>
-                        <h3 className='text-3xl playfair font-bold sm:text-4xl py-2'>Name & Name</h3>
-                        <p>31 Desember 2024</p>
+                        <h3 className='text-3xl playfair font-bold sm:text-4xl py-2'>{data?.name?.mens} & {data?.name?.grils}</h3>
+                        <p>{data?.date?.resepsi}</p>
                     </div>
                     <p className='relative mt-[50vh] sm:mt-[35vh] w-[95%]  sm:max-w-[1000px] mx-auto text-center  text-slate-200 sm:text-start text-sm  italic leading-tight z-10'>
                         "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan-pasangan dari jenismu sendiri, 
@@ -19,4 +32,8 @@ export default function Page2(params) {
             </div>
         </section>
     )
+}
+
+Page2.propTypes = {
+    data: PropTypes.string
 }

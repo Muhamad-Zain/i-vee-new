@@ -2,9 +2,10 @@
 import { SlBasket } from "react-icons/sl";
 import { SiWhatsapp, SiShopee } from "react-icons/si";
 import Link from "next/link";
+import PropTypes from "prop-types";
 
 
-export default function Page9(params) {
+export default function Page9({data}) {
     return(
         <section className='p-10'>
             {/* <div style={{backgroundImage: 'url(/img/image.png)'}} className={style.bg}>
@@ -30,16 +31,11 @@ export default function Page9(params) {
                     Atas do'a dan restunya kami ucapkan terima kasih. 
                 </p>
                 <p className='font-bold italic pt-10' >Dari Kami yang berbahagia :</p>
-                <h3 className='playfair text-3xl italic'>Nama & Nama</h3>
+                <h3 className='playfair text-3xl italic'>{data?.name?.mens} & {data?.name?.grils}</h3>
             </div>
             <div className="pt-20 pb-10 m-auto">
-                {/* <div className="flex justify-center py-2">
-                    <SlBasket className="text-xl fill-current" />
-                </div> */}
                 <p className="text-center text-xs py-2" >Create Invitation by i-vee</p>
                 <div className="flex text-sm w-10 justify-around m-auto " >
-                {/* <Link href=''> */}
-                {/* </Link> */}
                 <Link href=''>
                     <SiWhatsapp />
                 </Link>
@@ -50,4 +46,7 @@ export default function Page9(params) {
             </div>
         </section>
     )
+}
+Page9.propTypes = {
+    data: PropTypes.string
 }

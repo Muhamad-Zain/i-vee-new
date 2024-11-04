@@ -1,44 +1,160 @@
 "use client"
 import { useState } from 'react'
 import style from './style.module.css'
+import { ref, set } from 'firebase/database'
+import { database } from '../data/firebase'
+import PropTypes from 'prop-types'
 
 
-export default function Page8(params) {
+export default function Page8({id, data}) {
     const [gift, setGift] = useState(false)
+    const [select, setSelect] = useState('')
+    const [name, setName] = useState('')
+    const [jumlah, setJumlah] = useState('')
+
+    const [succes, setSucces] = useState(false)
+    const [load, setLoad] = useState(false)
+    const [load2, setLoad2] = useState(false)
+    const [load3, setLoad3] = useState(false)
+
+    const currentDate = new Date()
+    const day = currentDate.getDate()
+    const month =currentDate.getMonth() + 1
+    const year = currentDate.getFullYear()
+    const hours = currentDate.getHours();       // Mendapatkan jam
+    const minutes = currentDate.getMinutes();   // Mendapatkan menit
+    const seconds = currentDate.getSeconds(); 
 
 
+    const formattedDate = `${day}-${month}-${year}`;
+    const formattedTime = `${hours}:${minutes}:${seconds}`;
+    
 
     const handleGift = () => {
         setGift(!gift)
     }
+    const handleRsvp = (e) => {
+        setSelect(e.target.value)
+    }
+    const [alert, setAlert] = useState('')
+    const handleSendRsvp = (e) =>{
+        e.preventDefault()
+        if (name === '' || select === '') {
+            setAlert('Silahkan isi terlebih dahulu')
+            setTimeout(() => {
+                setAlert('')
+            }, 2000);
+        } else {
+            const rsvp = ref(database, `${id}/rsvp/${Date.now()}`)
+            set(rsvp, {
+                name,
+                confirm:select,
+                jumlah,
+                time: formattedTime,
+                day: formattedDate
+            })
+            setSucces(true)
+            setName('')
+            setJumlah('')
+        }
+    }
+    
 
+    const buttonCopy = async (text) => {
+        try {
+            await navigator.clipboard.writeText(text)
+            if (text === data?.gift?.one?.rekening ) {
+                setLoad(true)
+                setTimeout(() => {
+                    setLoad(false)
+                }, 2000);
+            } else if(text === data?.gift?.two?.rekening){
+                setLoad2(true)
+                setTimeout(() => {
+                    setLoad2(false)
+                }, 2000);
+            } else if(text === data?.gift?.home){
+                setLoad3(true)
+                setTimeout(() => {
+                   setLoad3(false) 
+                }, 2000);
+            }
 
+        } catch (error) {
+            
+        }
+    }
     return(
         <section className='my-10'>
             <div style={{backgroundImage: 'url(/img/image.png)'}} className={style.rsvp}>
-                <div className='z-10 relative w-full'>
+                <form 
+                    onSubmit={handleSendRsvp}
+                    className='z-10 relative w-full'>
                     <h3 className='text-5xl playfair text-center py-5'>RSVP</h3>
                     <p className='text-center text-xs'>Silahkan konfirmasi kehadiran anda !</p>
                     <label>Nama</label>
-                    <input type='text' placeholder='Masukkan Nama' className='w-full p-2 rounded-md outline-none text-black' />
-                    <div className='flex items-center justify-between  text-black my-5'>
-                        <div className='w-[45%]'>
-                            <label className='text-white grid'>Kehadiran</label>
-                            <select className='outline-none bg-white w-full p-[8.5px] rounded-md'>
-                                <option value='ya'>ya</option>
-                                <option value='tidak'>tidak</option>
-                                <option value='ragu'>ragu</option>
-                            </select>
-                        </div>
-                        <div className='w-[45%]'>
-                            <label className='text-white grid'>Jumlah</label>
-                            <input type='number' placeholder='' className='outline-none p-2 rounded-md w-full'/>
-                        </div>
+                    <input 
+                        type='text' 
+                        placeholder='Masukkan Nama'
+                        value={name}
+                        onChange={(e) => setName(e.target.value)} 
+                        className='w-full p-2 rounded-md outline-none text-black' />
+                    <p className='pt-5'>kehadiran</p>
+                    <p className='text-white text-xs py-2 text-center'>Silahkan pilih salah satu</p>
+                    <div className='flex justify-around w-[80%] sm:w-52 m-auto'>
+                    <div className=''>
+                    <label className='flex justify-center'>
+                        <input 
+                            type='radio'
+                            className='' 
+                            value='Hadir' 
+                            checked={select === 'Hadir'}
+                            onChange={handleRsvp} />
+                    </label>
+                        <p>Ya</p>
                     </div>
-                    <div className='flex justify-center'>
-                        <button className='py-2 px-4 rounded-full bg-black bg-opacity-45 border mx-auto'>Konfirmasi</button>
+                    <div>
+                    <label className='flex justify-center'>
+                        <input 
+                            type='radio' 
+                            className=''
+                            value='Tidak Hadir' 
+                            checked={select === 'Tidak Hadir'}
+                            onChange={handleRsvp} />
+                    </label>
+                        <p className='m-auto'>Tidak</p>
                     </div>
-                </div>
+                    <div>
+                    <label className='flex justify-center'>
+                        <input 
+                            type='radio' 
+                            value='Ragu-Ragu' 
+                            checked={select === 'Ragu-Ragu'}
+                            onChange={handleRsvp} />
+                    </label>
+                        <p>Ragu</p>
+                    </div>
+                    </div>
+
+                    <label className='text-white '>Jumlah</label>
+                    <input 
+                        type='number' 
+                        placeholder='Jumlah (opsional)' 
+                        value={jumlah}
+                        onChange={(e) => setJumlah(e.target.value)}
+                        className='outline-none text-black p-2 rounded-md w-full'/>
+                       
+                        <p className='text-slate-300 text-center py-2'>{alert}</p>
+                    <div className='flex pt-5 justify-center'>
+                        <button 
+                            type='submit'
+                            disabled={succes ? true : false}
+                            className='py-2 px-4 rounded-full bg-black bg-opacity-45 border mx-auto'
+                            >
+                                {succes ? 'succes' : 'Konfirmasi'}
+                        </button>
+                    </div>
+                </form>
                 <div className='border-b-2 w-[90%] m-auto relative z-10 py-5' />
                 <div className='relative z-10'>
                     <h1 className='text-5xl playfair text-center py-5 '>GIFT</h1>
@@ -49,21 +165,58 @@ export default function Page8(params) {
                             className='bg-black bg-opacity-45 border py-2 px-4 rounded-full'>Open Gift</button>
                         </div>
                     <div className={`${gift ? ' max-h-[200rem] opacity-100' : ' max-h-0 opacity-0 '} transition-all duration-500 ease-in-out  overflow-hidden w-full flex flex-wrap justify-around py-5`}>
-                        <div className='sm:w-[45%] w-[90%] my-2 bg-white border-4 border-double bg-opacity-25 p-5 rounded-2xl'>
-                            <h1>Mandiri</h1>
-                            <p>58964874347858758</p>
-                        </div>
-                        <div className='sm:w-[45%] w-[90%] my-2 bg-white border-4 border-double bg-opacity-25 p-5 rounded-2xl'>
-                            <h1>Mandiri</h1>
-                            <p>58964874347858758</p>
-                        </div>
-                        <div className='sm:w-[45%] w-[90%] my-2 bg-white border-4 border-double bg-opacity-25 p-5 rounded-2xl'>
-                            <h1>Mandiri</h1>
-                            <p>58964874347858758</p>
-                        </div>
+                        {data?.gift?.one?.nameBank === data?.gift?.one?.nameBank ? (
+                            <div className='sm:w-[45%] w-[90%] my-2 bg-white border-4 border-double border-slate-600 bg-opacity-95 px-5 py-2 rounded-2xl'>
+                            <h1 className='text-blue-800 font-bold text-2xl italic'>{data?.gift?.one?.nameBank}</h1>
+                            <div className='flex flex-wrap justify-between py-5 text-sm text-slate-900 italic'>
+                                <p>{data?.gift?.one?.rekening}</p>
+                                <p>{data?.gift?.one?.an}</p>
+                            </div>
+                            <button 
+                                onClick={() => buttonCopy(data?.gift?.one?.rekening)}
+                                disabled={load ? true : false}
+                                className='w-full py-1 bg-black bg-opacity-80 rounded-lg border'>
+                                    {load ? 'succes' : 'copy'}
+                            </button>
+                            </div>
+                        ): null}
+                        {data?.gift?.two?.nameBank === data?.gift?.two?.nameBank ? (
+                            <div className='sm:w-[45%] w-[90%] my-2 bg-white border-4 border-double border-slate-600 bg-opacity-95 px-5 py-2 rounded-2xl'>
+                            <h1 className='text-blue-800 font-bold text-2xl italic'>{data?.gift?.two?.nameBank}</h1>
+                            <div className='flex flex-wrap justify-between py-5 text-sm text-slate-900 italic'>
+                                <p>{data?.gift?.two?.rekening}</p>
+                                <p>{data?.gift?.two?.an}</p>
+                            </div>
+                            {/* <div className='flex justify-center'> */}
+                                <button 
+                                    onClick={() => buttonCopy(data?.gift?.two?.rekening)}
+                                    disabled={load2? true : false}
+                                    className='w-full py-1 bg-black bg-opacity-80 rounded-lg border'>{load2 ? 'succes' : 'copy'}</button>
+                            {/* </div> */}
+                            </div>
+                        ): null}
+                        {data?.gift?.home === data?.gift?.home ? (
+                            <div className='sm:w-[45%] w-[90%] my-2 bg-white border-4 border-double border-slate-600 bg-opacity-95 px-5 py-2 rounded-2xl'>
+                            <h1 className='text-black font-bold text-xl italic text-center'>Alamat kirim kado</h1>
+                            <div className='border-b-2 border-black' />
+                            <div className='flex justify-between py-5 text-sm text-slate-900 italic'>
+                                <p>{data?.gift?.home}</p>
+                            </div>
+                                <button
+                                    onClick={() => buttonCopy(data?.gift?.home)} 
+                                    disabled= {load3 ? true : false}
+                                    className='w-full py-1 bg-black bg-opacity-80 rounded-lg border'>
+                                        {load3 ? 'succes' : 'copy'}
+                                </button>
+                            </div>
+                        ): null}
                     </div>
                 </div>
             </div>
         </section>
     )
+}
+Page8.propTypes = {
+    id: PropTypes.string,
+    data: PropTypes.string
 }
