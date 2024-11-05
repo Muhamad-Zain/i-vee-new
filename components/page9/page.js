@@ -54,11 +54,11 @@ export default function Page9({data, id}) {
                 )):
                 null}
                 {open && (
-                    <section onClick={closeBtn} className="h-screen fixed flex justify-center items-center bg-black bg-opacity-50 z-20 p-5 inset-0 w-full">
-                        <div className="relative">
+                    <section className="h-screen fixed flex justify-center items-center bg-black bg-opacity-50 p-5 inset-0 w-full">
+                        <div className="relative z-30">
                             <button 
                                 onClick={closeBtn}
-                                className="absolute top-2  right-3 p-2 bg-black bg-opacity-70 rounded-full">
+                                className="absolute top-2 sm:top-32  right-3 p-2 bg-black bg-opacity-70 rounded-full">
                                 <CgCloseO className="fill-current text-xl" />
                             </button>
                             <div className="absolute top-1/2 flex justify-between w-full">
