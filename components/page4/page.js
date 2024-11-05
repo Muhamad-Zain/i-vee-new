@@ -4,11 +4,23 @@ import { IoLocationOutline } from "react-icons/io5";
 import { SiGooglemaps } from "react-icons/si";
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { fetchBg } from '../data/firebase';
 
-export default function Page4({data}) {
+export default function Page4({data, id}) {
+    const [image, setImage] = useState('')
+    useEffect(() => {
+        const getImage = async () => {
+            
+            const url = await fetchBg(`${id}/location`)
+            setImage(url)
+        }
+        getImage()
+
+    },[])
     return(
         <section>
-            <div style={{backgroundImage: 'url(/img/image.png'}} className={style.bgAcara}> 
+            <div style={{backgroundImage: `url(${image})`}} className={style.bgAcara}> 
                 <div className='relative z-10 py-5'>
                     <h3 className='playfair text-3xl sm:text-5xl'>AKAD NIKAH</h3>
                     <p className='uppercase'>{data?.date?.akad}</p>
@@ -51,5 +63,6 @@ export default function Page4({data}) {
     )
 }
 Page4.propTypes = {
-    data: PropTypes.string
+    data: PropTypes.string,
+    id: PropTypes.string
 }

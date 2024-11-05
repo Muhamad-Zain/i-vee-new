@@ -6,6 +6,9 @@ import Countdown from "react-countdown";
 
 export default function Page5({data}) {
     const time = `${data?.date?.all}`
+    // const WeddingDay = data?.date?.dateAll
+    
+    const wedingDate =  new Date(`${time}T10:00:00`)
     
     const [isClient, setIsClient] = useState(false);
 
@@ -49,6 +52,18 @@ export default function Page5({data}) {
           );
         }
       };
+      const handleSaveDate = () => {
+        const startDate = wedingDate.toISOString().replace(/-|:|\.\d\d\d/g,"").split(".")[0] + "Z"; // format UTC
+        const endDate = new Date(wedingDate.getTime() + 2 * 60 * 60 * 1000).toISOString().replace(/-|:|\.\d\d\d/g,"").split(".")[0] + "Z"; // 2 jam setelah acara
+        const eventTitle = `Wedding of ${data?.name?.mens} & ${data?.name?.grils}`;
+        const eventDetails = `Join us in celebrating the wedding of ${data?.name?.mens} & ${data?.name?.grils}.`;
+        const eventLocation = "Bojonegoro, Indonesia";
+      
+        const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(eventDetails)}&location=${encodeURIComponent(eventLocation)}`;
+        
+        window.open(calendarUrl, '_blank');
+      };
+      
     return(
         <section>
             <div className="text-center playfair text-3xl sm:text-5xl">
@@ -57,7 +72,9 @@ export default function Page5({data}) {
                   isClient && 
                   <Countdown date={time} renderer={renderer} />
                 }
-                <button className="py-2 px-4 rounded-2xl bg-white bg-opacity-10">SAVE DATE</button>
+                <button 
+                  onClick={handleSaveDate}
+                  className="py-2 px-4 rounded-2xl bg-white bg-opacity-10">SAVE DATE</button>
             </div>
         </section>
     )

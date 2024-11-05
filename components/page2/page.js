@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 import style from './style.module.css'
-import { fetchImage } from '../data/firebase'
+import { fetchBg, fetchImage } from '../data/firebase'
 import PropTypes from 'prop-types'
 
-export default function Page2({data}) {
+export default function Page2({data, id}) {
     const [image, setImage] = useState('')
 
     useEffect(()=> {
         const getImage = async () => {
-            const url = await fetchImage('315c3e89af9e7f5a9fcd456420609df9.jpg')
+            const url = await fetchBg(`${id}/home`)
             setImage(url)
         }
         getImage()
@@ -35,5 +35,6 @@ export default function Page2({data}) {
 }
 
 Page2.propTypes = {
-    data: PropTypes.string
+    data: PropTypes.string,
+    id: PropTypes.string
 }

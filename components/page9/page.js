@@ -1,29 +1,28 @@
-// import style from './style.module.css'
-import { SlBasket } from "react-icons/sl";
-import { SiWhatsapp, SiShopee } from "react-icons/si";
 import Link from "next/link";
+import { SiWhatsapp, SiShopee } from "react-icons/si";
 import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import { fetchGalery } from "../data/firebase";
 
 
-export default function Page9({data}) {
+export default function Page9({data, id}) {
+    const [image, setImage] = useState([])
+
+    useEffect(() =>{
+        const fetch = async () => {
+            const data = await fetchGalery(id)
+            setImage(data)
+        }
+        fetch()
+    },[])
     return(
         <section className='p-10'>
-            {/* <div style={{backgroundImage: 'url(/img/image.png)'}} className={style.bg}>
-                <div className='relative z-10 text-center'>
-                    <h1>WEDDING GIFT</h1>
-                    <p>Doa Restu Anda merupakan karunia yang sangat berarti bagi kami.</p>
-                </div>
-            </div> */}
             <h3 className='text-center text-5xl playfair pb-5 '>Our Galery</h3>
             <div className='grid grid-cols-2 sm:grid-cols-4 gap-4'>
-                <img src='/img/image.png' className='w-full h-[15rem] sm:h-[20rem] rounded-xl hover:opacity-50 ' style={{backgroundSize: 'cover', objectFit: 'cover', backgroundPosition: 'center'}} />
-                <img src='/img/image.png' className='w-full h-[15rem] sm:h-[20rem] rounded-xl hover:opacity-50 ' style={{backgroundSize: 'cover', objectFit: 'cover', backgroundPosition: 'center'}} />
-                <img src='/img/image.png' className='w-full h-[15rem] sm:h-[20rem] rounded-xl hover:opacity-50 ' style={{backgroundSize: 'cover', objectFit: 'cover', backgroundPosition: 'center'}} />
-                <img src='/img/image.png' className='w-full h-[15rem] sm:h-[20rem] rounded-xl hover:opacity-50 ' style={{backgroundSize: 'cover', objectFit: 'cover', backgroundPosition: 'center'}} />
-                <img src='/img/image.png' className='w-full h-[15rem] sm:h-[20rem] rounded-xl hover:opacity-50 ' style={{backgroundSize: 'cover', objectFit: 'cover', backgroundPosition: 'center'}} />
-                <img src='/img/image.png' className='w-full h-[15rem] sm:h-[20rem] rounded-xl ' style={{backgroundSize: 'cover', objectFit: 'cover', backgroundPosition: 'center'}} />
-                <img src='/img/image.png' className='w-full h-[15rem] sm:h-[20rem] rounded-xl ' style={{backgroundSize: 'cover', objectFit: 'cover', backgroundPosition: 'center'}} />
-                <img src='/img/image.png' className='w-full h-[15rem] sm:h-[20rem] rounded-xl ' style={{backgroundSize: 'cover', objectFit: 'cover', backgroundPosition: 'center'}} />
+                {image && image ? image.map((url, index) => (
+                    <img key={index} src={url}  className='w-full h-[15rem] sm:h-[20rem] rounded-xl hover:opacity-50 ' style={{backgroundSize: 'cover', objectFit: 'cover', backgroundPosition: 'center'}} />
+                )):
+                null}
             </div>
             <div className='text-center pt-28 text-sm italic '>
                 <p>
@@ -48,5 +47,6 @@ export default function Page9({data}) {
     )
 }
 Page9.propTypes = {
-    data: PropTypes.string
+    data: PropTypes.string,
+    id: PropTypes.string
 }

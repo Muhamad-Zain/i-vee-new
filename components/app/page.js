@@ -74,17 +74,17 @@ export default function App({id, name}) {
     },[])
     return(
         <section className="sm:px-20 relative">
-            <Page1 btn={btnElement}  data={data} name={name} />
+            <Page1 id={id} btn={btnElement}  data={data} name={name} />
             <div id="page2">
-                <Page2 data={data} />
+                <Page2 id={id} data={data} />
             </div>
-            <Page3 data={data} />
-            <Page4 data={data} />
+            <Page3 id={id} data={data} />
+            <Page4 id={id} data={data} />
             <Page5 data={data} />
-            <Page6 data={data} />
+            <Page6 id={id} data={data} />
             <Page7 id={id} />
             <Page8 id={id} data={data} />
-            <Page9 data={data} />
+            <Page9 id={id} data={data} />
             <button onClick={toggleMusic} 
                 className={`w-10 h-10 rounded-full border border-white flex justify-center items-center bg-opacity-50 fixed bottom-16 left-5 sm:left-20 z-20 ${bgToggle}`}>
                     <GiMusicSpell className='fill-current text-white rotate-icon' size={25} />

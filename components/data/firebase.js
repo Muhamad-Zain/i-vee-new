@@ -1,8 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getDownloadURL, getStorage, ref as storageRef  } from 'firebase/storage'
+import { getDownloadURL, getStorage, listAll, ref as storageRef  } from 'firebase/storage'
 import { getDatabase, child, get, ref } from 'firebase/database'
+import { collection, doc, getDocs, getFirestore } from 'firebase/firestore'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -24,6 +25,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app)
 const storage = getStorage(app)
+// const db = getFirestore(app)
 
 
 const fetchImage = async (name) => {
@@ -31,7 +33,6 @@ const fetchImage = async (name) => {
     const imgRef = storageRef(storage, imgPath)
     try {
         const url = await getDownloadURL(imgRef)
-        // setImage(url)
         return url
     } catch (error) {
         console.log("image" , error);
@@ -43,10 +44,7 @@ const fetchData = async (id) => {
     
     try {
         const dbRef = ref(database);
-        // const path = `wedings/${id}`
-        // const dbRef = ref(database, path )
         const data = await get(child(dbRef, `${id}`))
-        // const data = await get(dbRef)
         if (data.exists()) {
             return data.val()
         } else {
@@ -58,5 +56,48 @@ const fetchData = async (id) => {
         return null
     }
 }
+const fetchBg = async (id) => {
+    try {
+        const galleryRef = storageRef(storage, `${id}`); // Referensi ke folder '01/galery'
+        
+        const images = [];
+        const listResult = await listAll(galleryRef); // Mendapatkan semua item dalam folder
 
-export { storage, fetchImage, fetchData, database}
+        for (const item of listResult.items) {
+            const url = await getDownloadURL(item); // Mendapatkan URL dari setiap item
+            images.push(url); // Menyimpan URL ke array
+        }
+
+        return images;
+    } catch (error) {
+        console.log("Gagal mendapatkan gambar:", error);
+        return [];
+    }
+    // const imqColect =  collection(db, `${id}`)
+
+    // try {
+    //     const snapshot  = await getDocs
+    // } catch (error) {
+        
+    // }
+}
+const fetchGalery = async (id) => {
+    try {
+        const galleryRef = storageRef(storage, `${id}/galery`); // Referensi ke folder '01/galery'
+        
+        const images = [];
+        const listResult = await listAll(galleryRef); // Mendapatkan semua item dalam folder
+
+        for (const item of listResult.items) {
+            const url = await getDownloadURL(item); // Mendapatkan URL dari setiap item
+            images.push(url); // Menyimpan URL ke array
+        }
+
+        return images;
+    } catch (error) {
+        console.log("Gagal mendapatkan gambar:", error);
+        return [];
+    }
+}
+
+export { storage, fetchImage, fetchData, database, fetchGalery, fetchBg}

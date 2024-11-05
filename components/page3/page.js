@@ -1,11 +1,26 @@
 import PropTypes from 'prop-types'
 import style from './style.module.css'
+import { useEffect, useState } from 'react'
+import { fetchBg } from '../data/firebase'
 
-export default function Page3({data}) {
+export default function Page3({data, id}) {
+
+    const [groom, setGroom] = useState('')
+    const [bride, setBride] = useState('')
+
+    useEffect(()=> {
+        const getImage = async () => {
+            const urlGroom = await fetchBg(`${id}/groom`)
+            const urlBride = await fetchBg(`${id}/bride`)
+            setGroom(urlGroom)
+            setBride(urlBride)
+        }
+        getImage()
+    },[])
     return(
         <section className='py-10 px-2 sm:px-20'>
             <div className=' flex  items-center '>
-                <div style={{backgroundImage:'url(/img/image.png)'}} className={style.bgCardMen}>
+                <div style={{backgroundImage:`url(${groom})`}} className={style.bgCardMen}>
                 </div>
                 <div className={style.chil}>
                     <h3>THE GROOM</h3>
@@ -22,7 +37,7 @@ export default function Page3({data}) {
                 <div className={style.chil}>
                     <h3>THE BRIDE</h3>
                 </div>
-                <div style={{backgroundImage:'url(/img/image.png)'}} className={style.bgCardGrils}>
+                <div style={{backgroundImage:`url(${bride})`}} className={style.bgCardGrils}>
                 </div>
                 
             </div>
@@ -34,5 +49,6 @@ export default function Page3({data}) {
     )
 }
 Page3.propTypes = {
-    data: PropTypes.string
+    data: PropTypes.string,
+    id: PropTypes.string
 }

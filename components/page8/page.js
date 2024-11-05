@@ -1,12 +1,16 @@
 "use client"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import style from './style.module.css'
 import { ref, set } from 'firebase/database'
-import { database } from '../data/firebase'
+import { database, fetchBg } from '../data/firebase'
 import PropTypes from 'prop-types'
+import { MdFileCopy } from "react-icons/md";
+
 
 
 export default function Page8({id, data}) {
+    const [image, setImage] = useState('')
+
     const [gift, setGift] = useState(false)
     const [select, setSelect] = useState('')
     const [name, setName] = useState('')
@@ -84,9 +88,20 @@ export default function Page8({id, data}) {
             
         }
     }
+    useEffect(() => {
+        const getImage = async () => {
+            
+            const url = await fetchBg(`${id}/rsvp`)
+            setImage(url)
+        }
+
+        
+        getImage()
+
+    },[])
     return(
         <section className='my-10'>
-            <div style={{backgroundImage: 'url(/img/image.png)'}} className={style.rsvp}>
+            <div style={{backgroundImage: `url(${image})`}} className={style.rsvp}>
                 <form 
                     onSubmit={handleSendRsvp}
                     className='z-10 relative w-full'>
@@ -142,7 +157,7 @@ export default function Page8({id, data}) {
                         placeholder='Jumlah (opsional)' 
                         value={jumlah}
                         onChange={(e) => setJumlah(e.target.value)}
-                        className='outline-none text-black p-2 rounded-md w-full'/>
+                        className='outline-none text-black p-2 rounded-md w-full f'/>
                        
                         <p className='text-slate-300 text-center py-2'>{alert}</p>
                     <div className='flex pt-5 justify-center'>
@@ -175,7 +190,8 @@ export default function Page8({id, data}) {
                             <button 
                                 onClick={() => buttonCopy(data?.gift?.one?.rekening)}
                                 disabled={load ? true : false}
-                                className='w-full py-1 bg-black bg-opacity-80 rounded-lg border'>
+                                className='w-full py-1 bg-black bg-opacity-80 rounded-lg border flex justify-center items-center'>
+                                    <MdFileCopy className='mr-2' />
                                     {load ? 'succes' : 'copy'}
                             </button>
                             </div>
@@ -191,7 +207,10 @@ export default function Page8({id, data}) {
                                 <button 
                                     onClick={() => buttonCopy(data?.gift?.two?.rekening)}
                                     disabled={load2? true : false}
-                                    className='w-full py-1 bg-black bg-opacity-80 rounded-lg border'>{load2 ? 'succes' : 'copy'}</button>
+                                    className='w-full py-1 bg-black bg-opacity-80 rounded-lg border flex justify-center items-center'>
+                                    <MdFileCopy className='mr-2' />
+                                    {load2 ? 'succes' : 'copy'}
+                                </button>
                             {/* </div> */}
                             </div>
                         ): null}
@@ -205,8 +224,9 @@ export default function Page8({id, data}) {
                                 <button
                                     onClick={() => buttonCopy(data?.gift?.home)} 
                                     disabled= {load3 ? true : false}
-                                    className='w-full py-1 bg-black bg-opacity-80 rounded-lg border'>
-                                        {load3 ? 'succes' : 'copy'}
+                                    className='w-full py-1 bg-black bg-opacity-80 rounded-lg border flex justify-center items-center'>
+                                    <MdFileCopy className='mr-2' />
+                                    {load3 ? 'succes' : 'copy'}
                                 </button>
                             </div>
                         ): null}

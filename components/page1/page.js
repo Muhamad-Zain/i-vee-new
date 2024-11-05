@@ -2,10 +2,12 @@
 import PropTypes from 'prop-types'
 import style from './style.module.css'
 import { useEffect, useState } from 'react'
-import { fetchImage } from '../data/firebase'
+import { fetchBg, fetchImage } from '../data/firebase'
+import { LuPanelTopOpen } from "react-icons/lu";
 
 
-export default function Page1({btn, name, data}) {
+
+export default function Page1({btn, name, data, id}) {
     const [disable, setDisable] = useState(false)
     const [image, setImage] = useState('')
     // const [data, setData] = useState([])
@@ -21,7 +23,7 @@ export default function Page1({btn, name, data}) {
     useEffect(() => {
         const getImage = async () => {
             
-            const url = await fetchImage('image.png')
+            const url = await fetchBg(`${id}/hero`)
             setImage(url)
         }
 
@@ -38,7 +40,12 @@ export default function Page1({btn, name, data}) {
                 <div className='mt-[40vh]'>
                     <p className='text-sm'>kpd Bpk/Ibu/Saudara/i</p>
                     <h3 className='font-bold py-3 sm:py-5 playfair'>{name ? name : 'Nama Tamu'}</h3>
-                    <button onClick={()=> {btnLocal(), btn()}} disabled={disable} className='bg-black bg-opacity-20 p-2 px-4 border border-white rounded-full playfair'>Buka Undangan</button>
+                    <div className='flex justify-center'>
+                        <button onClick={()=> {btnLocal(), btn()}} disabled={disable} className='flex justify-center items-center bg-black bg-opacity-50 p-2 px-4 border border-white rounded-full playfair'>
+                            <LuPanelTopOpen className='mr-2' />
+                            Buka Undangan
+                        </button>
+                    </div>
                     <p className='text-xs italic  my-1'>Mohon maaf apabila ada kesalahan penulisan nama/gelar</p>
                 </div>
             </div>
@@ -50,5 +57,6 @@ export default function Page1({btn, name, data}) {
 Page1.propTypes = {
     btn: PropTypes.func,
     name: PropTypes.string,
-    data: PropTypes.string
+    data: PropTypes.string,
+    id: PropTypes.string
 }
