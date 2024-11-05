@@ -33,10 +33,10 @@ export default function Page9({data, id}) {
 
     const closeBtn = () => setOpen(false)
     const prevImage = () => {
-        setImgIndex((prev) => (prev - 1 ) % image.length)
+        setImgIndex((prev) => (prev - 1 + image.length ) % image.length)
     }
     const nextImage = () => {
-        setImgIndex((next) => (next - 1 + image.length  ) % image.length)
+        setImgIndex((next) => (next + 1  ) % image.length)
     }
 
     return(
@@ -54,8 +54,8 @@ export default function Page9({data, id}) {
                 )):
                 null}
                 {open && (
-                    <section className="h-screen fixed flex justify-center items-center bg-black bg-opacity-50 p-5 inset-0 w-full">
-                        <div className="relative z-30">
+                    <section className="h-screen fixed flex z-30 justify-center items-center bg-black bg-opacity-50 p-5 inset-0 w-full">
+                        <div className="relative ">
                             <button 
                                 onClick={closeBtn}
                                 className="absolute top-2 sm:top-32  right-3 p-2 bg-black bg-opacity-70 rounded-full">

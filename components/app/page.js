@@ -1,6 +1,11 @@
 'use client'
 import { useEffect, useState } from "react";
 import { GiMusicSpell } from "react-icons/gi";
+import { CgMenuRound } from "react-icons/cg";
+import { HiHomeModern } from "react-icons/hi2";
+import { FaPeoplePulling } from "react-icons/fa6";
+import { MdOutlineShareLocation } from "react-icons/md";
+import { PiGooglePhotosLogoFill } from "react-icons/pi";
 import PropTypes from "prop-types";
 import { fetchData } from "../data/firebase";
 import Page1 from "../page1/page";
@@ -44,7 +49,8 @@ export default function App({id, name}) {
             }
           }, 100); 
     }
-
+    const [open, setOpen] = useState(false)
+    const navbar = () => setOpen(!open)
     useEffect(() => {
 
         window.scrollTo(0,0)
@@ -92,6 +98,27 @@ export default function App({id, name}) {
             <audio id="music">
                 <source src='/melodi.mp3' type="audio/mp3" />
             </audio>
+            <button 
+                onClick={navbar}
+                className="w-10 h-10 rounded-full border border-white flex justify-center items-center bg-black bg-opacity-50 fixed bottom-5 sm:bottom-16 sm:left-36 left-5  z-20 ">
+                <CgMenuRound className='fill-current text-white ' size={25} />
+            </button>
+            {/* {open ? ( */}
+            <div className={`flex justify-around fixed bottom-5 w-52 left-20 sm:left-48 sm:bottom-16 transition-transform transform-gpu translate-x-full z-20 ${open ? 'animate-slide-in ': 'animate-slide-out' }`} >
+                <button className="w-9 h-9 rounded-full border border-white flex justify-center items-center bg-black bg-opacity-70  ">
+                    <HiHomeModern className='fill-current text-white ' size={20} />
+                </button>
+                <button className="w-9 h-9 rounded-full border border-white flex justify-center items-center bg-black bg-opacity-70  ">
+                    <FaPeoplePulling className='fill-current text-white ' size={20} />
+                </button>
+                <button className="w-9 h-9 rounded-full border border-white flex justify-center items-center bg-black bg-opacity-70  ">
+                    <MdOutlineShareLocation className='fill-current text-white ' size={20} />
+                </button>
+                <button className="w-9 h-9 rounded-full border border-white flex justify-center items-center bg-black bg-opacity-70  ">
+                    <PiGooglePhotosLogoFill className='fill-current text-white ' size={20} />
+                </button>
+            </div>
+            {/* null} */}
         </section>
     )
 }

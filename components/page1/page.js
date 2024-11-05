@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types'
 import style from './style.module.css'
 import { useEffect, useState } from 'react'
-import { fetchBg, fetchImage } from '../data/firebase'
+import { fetchBg } from '../data/firebase'
 import { LuPanelTopOpen } from "react-icons/lu";
 
 

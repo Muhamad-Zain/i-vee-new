@@ -1,5 +1,5 @@
 .bgHero{
-    @apply  relative w-full z-30 flex justify-center items-center;
+    @apply  relative w-full z-40 flex justify-center items-center;
     background-size: cover;
     background-position: center;
     object-fit: cover;
