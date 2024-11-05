@@ -5,6 +5,7 @@ import { ref, set } from 'firebase/database'
 import { database, fetchBg } from '../data/firebase'
 import PropTypes from 'prop-types'
 import { MdFileCopy } from "react-icons/md";
+import { AnimatedSection, AnimateSee } from '../animation'
 
 
 
@@ -101,7 +102,9 @@ export default function Page8({id, data}) {
     },[])
     return(
         <section className='my-10'>
+            <AnimatedSection>
             <div style={{backgroundImage: `url(${image})`}} className={style.rsvp}>
+                <AnimateSee>
                 <form 
                     onSubmit={handleSendRsvp}
                     className='z-10 relative w-full'>
@@ -170,7 +173,9 @@ export default function Page8({id, data}) {
                         </button>
                     </div>
                 </form>
+                </AnimateSee>
                 <div className='border-b-2 w-[90%] m-auto relative z-10 py-5' />
+                <AnimateSee>
                 <div className='relative z-10'>
                     <h1 className='text-5xl playfair text-center py-5 '>GIFT</h1>
                     <p className='text-center text-xs pb-5'>Doa Restu Anda merupakan karunia yang sangat berarti bagi kami.</p>
@@ -232,7 +237,9 @@ export default function Page8({id, data}) {
                         ): null}
                     </div>
                 </div>
+            </AnimateSee>
             </div>
+            </AnimatedSection>
         </section>
     )
 }

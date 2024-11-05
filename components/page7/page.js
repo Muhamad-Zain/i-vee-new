@@ -3,6 +3,7 @@ import style from './style.module.css'
 import { useEffect, useState } from 'react'
 import { database, fetchBg, fetchData } from '../data/firebase'
 import { onValue, ref, set } from 'firebase/database'
+import { AnimatedSection, AnimateSee } from '../animation'
 
 export default function Page7({data, id}) {
 
@@ -52,7 +53,9 @@ export default function Page7({data, id}) {
     }
     return(
         <section className='py-10'>
+            <AnimatedSection>
             <div style={{backgroundImage: `url(${image})`}} className={style.comment}>
+                <AnimateSee>
                 <form
                     onSubmit={handleSend} 
                     className='relative z-10 text-black'>
@@ -90,7 +93,9 @@ export default function Page7({data, id}) {
 
                     </div>
                 </form>
+                </AnimateSee>
             </div>
+            </AnimatedSection>
         </section>
     )
 }

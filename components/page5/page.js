@@ -2,6 +2,7 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import Countdown from "react-countdown";
+import { AnimatedSection } from "../animation";
 
 
 export default function Page5({data}) {
@@ -66,6 +67,7 @@ export default function Page5({data}) {
       
     return(
         <section>
+          <AnimatedSection>
             <div className="text-center playfair text-3xl sm:text-5xl">
                 <h3>COUNDOWN ACARA</h3>
                 {
@@ -76,6 +78,7 @@ export default function Page5({data}) {
                   onClick={handleSaveDate}
                   className="py-2 px-4 rounded-2xl bg-white bg-opacity-10">SAVE DATE</button>
             </div>
+            </AnimatedSection>
         </section>
     )
 }

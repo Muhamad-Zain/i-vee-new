@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { fetchBg } from '../data/firebase';
+import { AnimatedSection, AnimateSee } from '../animation';
 
 export default function Page4({data, id}) {
     const [image, setImage] = useState('')
@@ -20,7 +21,9 @@ export default function Page4({data, id}) {
     },[])
     return(
         <section>
+            <AnimatedSection>
             <div style={{backgroundImage: `url(${image})`}} className={style.bgAcara}> 
+                <AnimateSee>
                 <div className='relative z-10 py-5'>
                     <h3 className='playfair text-3xl sm:text-5xl'>AKAD NIKAH</h3>
                     <p className='uppercase'>{data?.date?.akad}</p>
@@ -39,7 +42,9 @@ export default function Page4({data, id}) {
                         location
                     </Link>
                 </div>
+                </AnimateSee>
                 <div className='border-b-2 border-white w-10/12 sm:w-1/2 relative z-10' />
+                <AnimateSee>
                 <div className='relative z-10 py-5'>
                     <h3 className='playfair text-3xl sm:text-5xl'>RESEPSI</h3>
                     <p className='uppercase'>{data?.date?.resepsi}</p>
@@ -58,7 +63,9 @@ export default function Page4({data, id}) {
                         location
                     </Link>
                 </div>
+                </AnimateSee>
             </div>
+            </AnimatedSection>
         </section>
     )
 }
