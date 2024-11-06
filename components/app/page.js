@@ -24,6 +24,8 @@ export default function App({id, name}) {
     const [isHidden, setIsHidden] = useState(true)
     const [bgToggle, setBgTogle] = useState('bg-black')
     const [data, setData] = useState([])
+    const [open, setOpen] = useState(false)
+
     
 
 
@@ -49,7 +51,15 @@ export default function App({id, name}) {
             }
           }, 100); 
     }
-    const [open, setOpen] = useState(false)
+    const btnbar = (page) => {
+        setTimeout(() => {
+            const selectId = document.getElementById(`${page}`);
+      
+            if (selectId) {
+              selectId.scrollIntoView({ behavior: 'smooth' });  // Scroll setelah delay
+            }
+          }, 100); 
+    }
     const navbar = () => setOpen(!open)
     useEffect(() => {
 
@@ -84,13 +94,19 @@ export default function App({id, name}) {
             <div id="page2">
                 <Page2 id={id} data={data} />
             </div>
-            <Page3 id={id} data={data} />
-            <Page4 id={id} data={data} />
+            <div id="page3">
+                <Page3 id={id} data={data} />
+            </div>
+            <div id="page4">
+                <Page4 id={id} data={data} />
+            </div>
             <Page5 data={data} />
             <Page6 id={id} data={data} />
             <Page7 id={id} />
             <Page8 id={id} data={data} />
-            <Page9 id={id} data={data} />
+            <div id="page9">
+                <Page9 id={id} data={data} />
+            </div>
             <button onClick={toggleMusic} 
                 className={`w-10 h-10 rounded-full border border-white flex justify-center items-center bg-opacity-50 fixed bottom-16 left-5 sm:left-20 z-20 ${bgToggle}`}>
                     <GiMusicSpell className='fill-current text-white rotate-icon' size={25} />
@@ -104,17 +120,29 @@ export default function App({id, name}) {
                 <CgMenuRound className='fill-current text-white ' size={25} />
             </button>
             {/* {open ? ( */}
-            <div className={`flex justify-around fixed bottom-5 w-52 left-20 sm:left-48 sm:bottom-16 transition-transform transform-gpu translate-x-full z-20 ${open ? 'animate-slide-in ': 'animate-slide-out' }`} >
-                <button className="w-9 h-9 rounded-full border border-white flex justify-center items-center bg-black bg-opacity-70  ">
+            <div className={`flex justify-around fixed bottom-5 w-52 left-20 sm:left-48 sm:bottom-16 transition-transform transform-gpu translate-x-full  ${open ? 'animate-slide-in z-20 ': 'animate-slide-out z-10' }`} >
+                <button 
+                    disabled={open ? false: true}
+                    onClick={() => btnbar('page2')}
+                    className="w-9 h-9 rounded-full border border-white flex justify-center items-center bg-black bg-opacity-70  ">
                     <HiHomeModern className='fill-current text-white ' size={20} />
                 </button>
-                <button className="w-9 h-9 rounded-full border border-white flex justify-center items-center bg-black bg-opacity-70  ">
+                <button 
+                    disabled={open ? false: true}
+                    onClick={() => btnbar('page3')}
+                    className="w-9 h-9 rounded-full border border-white flex justify-center items-center bg-black bg-opacity-70  ">
                     <FaPeoplePulling className='fill-current text-white ' size={20} />
                 </button>
-                <button className="w-9 h-9 rounded-full border border-white flex justify-center items-center bg-black bg-opacity-70  ">
+                <button 
+                    disabled={open ? false: true}
+                    onClick={() => btnbar('page4')}
+                    className="w-9 h-9 rounded-full border border-white flex justify-center items-center bg-black bg-opacity-70  ">
                     <MdOutlineShareLocation className='fill-current text-white ' size={20} />
                 </button>
-                <button className="w-9 h-9 rounded-full border border-white flex justify-center items-center bg-black bg-opacity-70  ">
+                <button 
+                    disabled={open ? false: true}
+                    onClick={() => btnbar('page9')}
+                    className="w-9 h-9 rounded-full border border-white flex justify-center items-center bg-black bg-opacity-70  ">
                     <PiGooglePhotosLogoFill className='fill-current text-white ' size={20} />
                 </button>
             </div>
