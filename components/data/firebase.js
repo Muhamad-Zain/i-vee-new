@@ -88,7 +88,7 @@ const fetchBg = async (id) => {
 // Fetch Image Galery from Firebase
 const fetchGalery = async (id) => {
     try {
-        const galleryRef = storageRef(storage, `${id}/galery`); // Referensi ke folder '01/galery'
+        const galleryRef = storageRef(storage, `${id}/gallery`); // Referensi ke folder '01/galery'
         
         const images = [];
         const listResult = await listAll(galleryRef); // Mendapatkan semua item dalam folder

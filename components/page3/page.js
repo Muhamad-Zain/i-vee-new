@@ -31,8 +31,8 @@ export default function Page3({data, id}) {
             </AnimatedSection>
             <AnimateSee>
             <div className='relative z-10  p-5'>
-                <h3 className='text-2xl playfair italic font-bold' style={{textShadow: '2px 2px black'}}>{data?.name?.namaLenkap?.mens}</h3>
-                <p className='italic'>Putra Dari bapak {data?.parent?.mens?.father} <br /> dan Ibu {data?.parent?.grils?.mother} </p>
+                <h3 className='text-2xl playfair italic font-bold' style={{textShadow: '2px 2px black'}}>{data?.name?.namaLengkap?.mens}</h3>
+                <p className='italic'>Putra Dari bapak {data?.parent?.mens}</p>
             </div>
             </AnimateSee>
             <div className='flex justify-center items-center py-5 text-5xl playfair'>
@@ -49,8 +49,8 @@ export default function Page3({data, id}) {
             </AnimatedSection>
             <AnimateSee>
             <div className='relative z-10 text-end p-5'>
-                <h3 className='text-2xl playfair italic font-bold'  style={{textShadow: '2px 2px black'}}>{data?.name?.namaLenkap?.grils}</h3>
-                <p className='italic'>Putri Dari bapak {data?.parent?.grils?.father} <br /> dan Ibu {data?.parent?.grils?.mother} </p>
+                <h3 className='text-2xl playfair italic font-bold'  style={{textShadow: '2px 2px black'}}>{data?.name?.namaLengkap?.grils}</h3>
+                <p className='italic'>Putri Dari bapak {data?.parent?.grils}</p>
             </div>
             </AnimateSee>
         </section>

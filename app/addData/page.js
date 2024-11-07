@@ -1,5 +1,6 @@
 'use client'
 import { addDataToFirebase, uploadFiles } from "@/components/data/firebase"
+import Link from "next/link";
 import { useState } from "react"
 // import {v4 as uuid4} from 'uuid'
 
@@ -66,7 +67,7 @@ export default function AddData() {
   };
 
   console.log(files);
-  
+  const [message, setMessage] = useState('')
   const handleSubmit = async(e) => {
     e.preventDefault();
     const id =  Date.now().toString();
@@ -87,7 +88,7 @@ export default function AddData() {
       'story',
       // 'galery'
       ]);
-
+      setMessage(id)
       // Log hasil upload
       console.log("Uploaded files:", uploadedFiles);
       // Anda bisa memperbarui UI atau state di sini berdasarkan file yang telah di-upload
@@ -193,9 +194,16 @@ export default function AddData() {
                     <p className="text-white py-2">foto 8</p>
                     <input type="file" className="text-white grid" onChange={handleFileChange} name="galery" multiple/>
 
-                    <button type="submit" className="bg-slate-300 py-2 rounded-md">Add Data</button>
+                    <button type="submit" className="bg-slate-300 p-2 my-10 w-full   rounded-md">Add Data</button>
                     
                 </form>
+                <div className="">
+                  {
+                    message ? (
+                      <p>https://i-vee-new/{message}</p>
+                    ) : null
+                  }
+                </div>
             </div>
         </section>
     )
