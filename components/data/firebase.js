@@ -88,7 +88,7 @@ const fetchBg = async (id) => {
 // Fetch Image Galery from Firebase
 const fetchGalery = async (id) => {
     try {
-        const galleryRef = storageRef(storage, `${id}/gallery`); // Referensi ke folder '01/galery'
+        const galleryRef = storageRef(storage, `${id}/galery`); // Referensi ke folder '01/galery'
         
         const images = [];
         const listResult = await listAll(galleryRef); // Mendapatkan semua item dalam folder
@@ -125,6 +125,8 @@ const addDataToFirebase = async (id, formData) => {
         console.error(`Error: File or file name is undefined for category ${category}`);
         return;
       }
+      console.log(`Uploading file: ${file.name} to category: ${category}`); // Log tambahan
+
     try {
       // Membuat referensi file di Firebase Storage
       const fileRef = storageRef(storage, `${id}/${category}/${file.name}`);
@@ -133,18 +135,18 @@ const addDataToFirebase = async (id, formData) => {
       await uploadBytes(fileRef, file);
   
       // Mendapatkan URL file setelah di-upload
-      const downloadURL = await getDownloadURL(fileRef);
+      // const downloadURL = await getDownloadURL(fileRef);
   
-      // Menyimpan metadata file di Firebase Realtime Database
-      const dbPathRef = ref(database, `images/${id}/${category}`);
-      const newImageRef = push(dbPathRef);
-      await set(newImageRef, {
-        name: file.name,
-        url: downloadURL,
-      });
+      // // Menyimpan metadata file di Firebase Realtime Database
+      // const dbPathRef = ref(database, `images/${id}/${category}`);
+      // const newImageRef = push(dbPathRef);
+      // await set(newImageRef, {
+      //   name: file.name,
+      //   url: downloadURL,
+      // });
   
       // Mengembalikan data file yang di-upload
-      return { category, name: file.name, url: downloadURL };
+      return { category};
     } catch (error) {
       console.error("Error uploading file:", error);
       throw new Error("File upload failed.");
@@ -159,19 +161,36 @@ const addDataToFirebase = async (id, formData) => {
       const uploadedFiles = [];
   
       // Meng-upload file dari setiap kategori
+      // for (const category of categories) {
+      //   if (files[category]) {
+      //     // Jika ada file di kategori tersebut, upload file tersebut
+      //     const uploadedFile = await uploadFileToFirebase(files[category], category, id);
+      //     uploadedFiles.push(uploadedFile);
+      //   }
+      // }
+  
+      // // Meng-upload file galeri
+      // if (files.galery && files.galery.length > 0) {
+      //   for (const file of files.galery) {
+      //     const uploadedFile = await uploadFileToFirebase(file, "gallery", id);
+      //     uploadedFiles.push(uploadedFile);
+      //   }
+      // }
       for (const category of categories) {
         if (files[category]) {
-          // Jika ada file di kategori tersebut, upload file tersebut
-          const uploadedFile = await uploadFileToFirebase(files[category], category, id);
-          uploadedFiles.push(uploadedFile);
-        }
-      }
-  
-      // Meng-upload file galeri
-      if (files.galery && files.galery.length > 0) {
-        for (const file of files.galery) {
-          const uploadedFile = await uploadFileToFirebase(file, "gallery", id);
-          uploadedFiles.push(uploadedFile);
+          const file = files[category];
+          if (Array.isArray(file)) {
+            const validFiles = file.filter(item => item && item.name); 
+            for (const file of validFiles) {
+              if (file && file.name) { // Validasi file
+                const uploadedFile = await uploadFileToFirebase(file, category, id);
+                uploadedFiles.push(uploadedFile);
+              }
+            }
+          } else if (file && file.name) { // Validasi file tunggal
+            const uploadedFile = await uploadFileToFirebase(file, category, id);
+            uploadedFiles.push(uploadedFile);
+          }
         }
       }
   

@@ -32,7 +32,7 @@ export default function Page3({data, id}) {
             <AnimateSee>
             <div className='relative z-10  p-5'>
                 <h3 className='text-2xl playfair italic font-bold' style={{textShadow: '2px 2px black'}}>{data?.name?.namaLengkap?.mens}</h3>
-                <p className='italic'>Putra Dari bapak {data?.parent?.mens}</p>
+                <p className='italic w-48'  dangerouslySetInnerHTML={{ __html: data?.parent?.mens }}></p>
             </div>
             </AnimateSee>
             <div className='flex justify-center items-center py-5 text-5xl playfair'>
@@ -50,7 +50,8 @@ export default function Page3({data, id}) {
             <AnimateSee>
             <div className='relative z-10 text-end p-5'>
                 <h3 className='text-2xl playfair italic font-bold'  style={{textShadow: '2px 2px black'}}>{data?.name?.namaLengkap?.grils}</h3>
-                <p className='italic'>Putri Dari bapak {data?.parent?.grils}</p>
+                <p className='italic'  dangerouslySetInnerHTML={{ __html: data?.parent?.grils }}
+                ></p>
             </div>
             </AnimateSee>
         </section>

@@ -35,7 +35,9 @@ export default function Page1({btn, name, data, id}) {
         <section style={{backgroundImage : `url(${image})`}} className= {style.bgHero}>
             <div className='relative z-20 w-full  text-center'>
                 <h3 className='tracking-[0.1em] '>The Wedding Of</h3>
-                <h1 className='text-3xl font-bold py-1 playfair flex flex-wrap w-[90%] justify-center m-auto '>{data?.name?.mens} <span className='mx-2 w-full'> & </span> {data?.name?.grils}</h1>
+                <div className='text-3xl font-bold py-1 playfair sm:flex justify-center m-auto '>
+                    <h3>{data?.name?.mens} </h3> <p>&</p> <h3> {data?.name?.grils}</h3>
+                </div> 
                 <p className='text-sm'>{data?.date?.resepsi}</p>
                 <div className='mt-[40vh]'>
                     <p className='text-sm'>kpd Bpk/Ibu/Saudara/i</p>

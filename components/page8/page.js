@@ -50,7 +50,7 @@ export default function Page8({id, data}) {
                 setAlert('')
             }, 2000);
         } else {
-            const rsvp = ref(database, `${id}/rsvp/${Date.now()}`)
+            const rsvp = ref(database, `weddings/${id}/rsvp/${Date.now()}`)
             set(rsvp, {
                 name,
                 confirm:select,

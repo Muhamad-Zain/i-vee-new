@@ -75,3 +75,20 @@ htmk{
 .animate-slide-out {
   animation: slide-out 0.5s ease-out forwards;
 }
+
+
+.loading-spinner {
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+/* Keyframes untuk animasi rotasi */
+@keyframes spin {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

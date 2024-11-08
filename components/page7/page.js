@@ -5,12 +5,14 @@ import { database, fetchBg, fetchData } from '../data/firebase'
 import { onValue, ref, set } from 'firebase/database'
 import { AnimatedSection, AnimateSee } from '../animation'
 
-export default function Page7({data, id}) {
+export default function Page7({ id}) {
 
     const [message, setMessage] = useState('')
     const [name, setName] = useState('')
     const [ucapan, setUcapan] = useState([])
     const [image, setImage] = useState('')
+   
+    
 
     useEffect(() => {
         const getImage = async () => {
@@ -21,7 +23,7 @@ export default function Page7({data, id}) {
 
         
         getImage()
-        const messageRef = ref(database, `${id}/expresion`)
+        const messageRef = ref(database, `weddings/${id}/expresion/`)
         onValue(messageRef ,(snapshot) => {
             const data = snapshot.val()
             const list = []
@@ -41,7 +43,7 @@ export default function Page7({data, id}) {
                 setAlert('')
             }, 2000);
         } else {
-            const messages = ref(database, `${id}/expresion/${Date.now()}`)
+            const messages = ref(database, `/weddings/${id}/expresion/${Date.now()}`)
             set(messages, {
                 name,
                 text:message
@@ -101,6 +103,5 @@ export default function Page7({data, id}) {
 }
 
 Page7.propTypes = {
-    data: PropTypes.string,
     id: PropTypes.string
 }
