@@ -36,7 +36,7 @@ export default function Page1({btn, name, data, id}) {
             <div className='relative z-20 w-full  text-center'>
                 <h3 className='tracking-[0.1em] '>The Wedding Of</h3>
                 <div className='text-3xl font-bold py-1 playfair sm:flex justify-center m-auto '>
-                    <h3>{data?.name?.mens} </h3> <p>&</p> <h3> {data?.name?.grils}</h3>
+                    <h3>{data?.name?.mens} </h3> <p className='sm:mx-2'>&</p> <h3> {data?.name?.grils}</h3>
                 </div> 
                 <p className='text-sm'>{data?.date?.resepsi}</p>
                 <div className='mt-[40vh]'>
