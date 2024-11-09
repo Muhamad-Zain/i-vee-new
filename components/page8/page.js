@@ -100,9 +100,19 @@ export default function Page8({id, data}) {
         getImage()
 
     },[])
+
+    // const wa = '6285895764975'
+    // const pesan = `${name} saya akan ${select}`
+
+    // const handleWa = () => {
+    //     const url = `https://wa.me/${wa}?text=${encodeURIComponent(pesan)}`
+    //     window.open(url, '_blank')
+    // }
     return(
         <section className='my-10'>
             <AnimatedSection>
+
+                {/* <button onClick={handleWa} className='bg-slate-300 p-2 rounded-md'>Send Wa</button> */}
             <div style={{backgroundImage: `url(${image})`}} className={style.rsvp}>
                 <AnimateSee>
                 <form 

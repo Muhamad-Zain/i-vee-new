@@ -1,6 +1,7 @@
 'use client'
 import App from "@/components/app/page"
 import { useParams } from "next/navigation"
+import Rsvp from "../rsvp/page"
 // import { useRouter } from "next/router"
 
 export default function id() {
@@ -9,6 +10,7 @@ export default function id() {
 return(
     <section>
         <App id={idParams}  />
+        {/* <Rsvp /> */}
     </section>
 )    
 }

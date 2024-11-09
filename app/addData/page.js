@@ -2,7 +2,6 @@
 import { addDataToFirebase, uploadFiles } from "@/components/data/firebase"
 import Link from "next/link";
 import { useState } from "react"
-// import {v4 as uuid4} from 'uuid'
 
 export default function AddData() {
     const [newId, setNewId] = useState('')  
@@ -10,9 +9,7 @@ export default function AddData() {
     const [auth, setAuth ] = useState(false) 
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
-    // console.log(newId);
-    // const id =  '31423123421';
-    // setNewId(`i-vee-new.vercel.app/${id}`)
+    
     
 
     const [data, setData] = useState({
