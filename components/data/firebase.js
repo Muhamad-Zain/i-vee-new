@@ -25,19 +25,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app)
 const storage = getStorage(app)
-// const db = getFirestore(app)
-
-
-// const fetchImage = async (name) => {
-//     const imgPath = `image/${name}`
-//     const imgRef = storageRef(storage, imgPath)
-//     try {
-//         const url = await getDownloadURL(imgRef)
-//         return url
-//     } catch (error) {
-//         console.log("image" , error);
-//     }
-// }
 
 // fetch Data firebase
 

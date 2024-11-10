@@ -1,5 +1,3 @@
-// app/[id]/[name]/page.js
-
 "use client"; // Menandakan bahwa komponen ini harus dijalankan di sisi klien
 import App from "@/components/app/page"; // Ganti path ini sesuai dengan lokasi komponen App
 import { useParams } from "next/navigation";

@@ -7,9 +7,6 @@ import { FaAngleDoubleRight, FaAngleDoubleLeft } from "react-icons/fa";
 import { CgCloseO } from "react-icons/cg";
 import { AnimatedSection } from "../animation";
 
-// import { FaAngleDoubleLeft } from "react-icons/fa";
-
-
 
 
 export default function Page9({data, id}) {
