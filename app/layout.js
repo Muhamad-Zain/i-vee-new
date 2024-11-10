@@ -16,6 +16,19 @@ const geistMono = localFont({
 export const metadata = {
   title: "Weddings-app",
   description: "Undangan Digital",
+  openGraph: {
+    title: "Undangan Pernikahan",
+    description: "Selamat datang di undangan pernikahan kami! Silakan RSVP dan tinggalkan ucapan untuk kami.",
+    url: "https://your-vercel-project.vercel.app",
+    images: [
+      {
+        url: "/img/wedding.png",
+        width: 1200,
+        height: 630,
+        alt: "Undangan Pernikahan",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({ children }) {

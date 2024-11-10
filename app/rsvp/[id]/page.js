@@ -40,7 +40,7 @@ export default function Rsvp() {
             <div className="p-5">
                 <h2 className="playfair text-5xl font-bold underline text-center italic animate-pulse py-5">RSVP</h2>
                 <div>
-                    <h3>Konfirmasi Kehadiran </h3>
+                    <h3 className="py-5">Konfirmasi Kehadiran </h3>
                     <div className="overflow-x-auto rounded-lg border border-slate-200">
                     <table className=" min-w-full  text-sm leading-normal">
                         <thead className="uppercase">
