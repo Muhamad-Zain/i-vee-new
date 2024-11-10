@@ -16,7 +16,7 @@ export const metadata = {
   title: "Weddings-app",
   description: "Undangan Digital",
   openGraph: {
-    type: "website",
+    // type: "website",
     title: "Undangan Pernikahan",
     description: "Selamat datang di undangan pernikahan kami!",
     url: "https://i-vee-new.vercel.app",

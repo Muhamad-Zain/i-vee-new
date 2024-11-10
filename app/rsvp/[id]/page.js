@@ -12,14 +12,7 @@ export default function Rsvp() {
 
     console.log(data);
     
-    // useEffect(() => {
-    //     const getData = async () => {
-    //         const data = await fetchData(`${id}/rsvp`)
-    //         setData(data || [])
-    //     }
-    //     getData()
-    // },[])
-    // console.log(id);
+    
     
     useEffect(() => {
         const getData = async () => {
