@@ -62,7 +62,6 @@ export default function App({id, name}) {
     }
     const navbar = () => setOpen(!open)
     useEffect(() => {
-
         window.scrollTo(0,0)
 
         const handleResize = () => {

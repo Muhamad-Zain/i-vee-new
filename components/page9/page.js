@@ -87,9 +87,9 @@ export default function Page9({data, id}) {
             <div className="pt-20 pb-10 m-auto">
                 <p className="text-center text-xs py-2" >Create Invitation by i-vee</p>
                 <div className="flex text-sm w-10 justify-around m-auto " >
-                <Link href=''>
+                {/* <Link href=''>
                     <SiWhatsapp />
-                </Link>
+                </Link> */}
                 <Link href=''>
                     <SiShopee />
                 </Link>
