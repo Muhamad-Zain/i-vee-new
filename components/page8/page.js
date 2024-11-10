@@ -104,8 +104,6 @@ export default function Page8({id, data}) {
     return(
         <section className='my-10'>
             <AnimatedSection>
-
-                {/* <button onClick={handleWa} className='bg-slate-300 p-2 rounded-md'>Send Wa</button> */}
             <div style={{backgroundImage: `url(${image})`}} className={style.rsvp}>
                 <AnimateSee>
                 <form 

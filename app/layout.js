@@ -1,6 +1,5 @@
 import localFont from "next/font/local";
 import "./globals.css";
-// import Head from "next/head";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -19,13 +18,13 @@ export const metadata = {
   openGraph: {
     type: "website",
     title: "Undangan Pernikahan",
-    description: "Selamat datang di undangan pernikahan kami! Silakan RSVP dan tinggalkan ucapan untuk kami.",
+    description: "Selamat datang di undangan pernikahan kami!",
     url: "https://i-vee-new.vercel.app",
     images: [
       {
         url: "/img/wedding.png",
-        width: 1200,
-        height: 630,
+        width: 300,
+        height: 300,
         alt: "Undangan Pernikahan",
       },
     ],
@@ -36,7 +35,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* <link rel="icon" href="/icons.ico" type="image/x-icon" /> */}
+        <link rel="icon" href="/icons.ico" type="image/x-icon" />
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
       </head>
       <body
