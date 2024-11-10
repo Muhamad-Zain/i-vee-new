@@ -101,13 +101,6 @@ export default function Page8({id, data}) {
 
     },[])
 
-    // const wa = '6285895764975'
-    // const pesan = `${name} saya akan ${select}`
-
-    // const handleWa = () => {
-    //     const url = `https://wa.me/${wa}?text=${encodeURIComponent(pesan)}`
-    //     window.open(url, '_blank')
-    // }
     return(
         <section className='my-10'>
             <AnimatedSection>

@@ -17,9 +17,10 @@ export const metadata = {
   title: "Weddings-app",
   description: "Undangan Digital",
   openGraph: {
+    type: "website",
     title: "Undangan Pernikahan",
     description: "Selamat datang di undangan pernikahan kami! Silakan RSVP dan tinggalkan ucapan untuk kami.",
-    url: "https://your-vercel-project.vercel.app",
+    url: "https://i-vee-new.vercel.app",
     images: [
       {
         url: "/img/wedding.png",
