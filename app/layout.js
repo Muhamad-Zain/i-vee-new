@@ -15,6 +15,20 @@ const geistMono = localFont({
 export const metadata = {
   title: "Weddings-app",
   description: "Undangan Digital",
+  openGraph: {
+    title: "Weddings-app",
+    description: "Undangan Digital untuk acara pernikahan.",
+    url: "https://i-vee-new.vercel.app/3134123434/",
+    images: [
+      {
+        url: "https://i-vee-new.vercel.app/img/wedding.png",
+        width: 1200,
+        height: 630,
+        alt: "Banner Undangan Pernikahan",
+      },
+    ],
+    type: "website",
+  }
 };
 
 export default function RootLayout({ children }) {
