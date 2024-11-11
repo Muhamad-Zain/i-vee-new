@@ -1,5 +1,5 @@
 'use client'
-import { addDataToFirebase, loginUser, uploadFiles, auth } from "@/components/data/firebase"
+import { addDataToFirebase, uploadFiles, auth, loginUser } from "@/components/data/firebase"
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react"
 
@@ -128,24 +128,22 @@ export default function AddData() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [verify, setVerify] = useState(false)
-  console.log(email, password);
+  // console.log(email, password);
   const [err, setErr] = useState('')
   
-const loginUser = async (email, password) => {
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
-    console.log("User logged in:", user);
-    setVerify(true)
+const login = async (email, password) => {
+      const fetch = await loginUser(email, password)
+      if (fetch === true) {
+        setVerify(true)
+        
+      } else {
+        setErr('gagal autentication')
+        setTimeout(() => {
+          setErr('')
+        }, 3000);
+        setVerify(false)
+      }
 
-  } catch (error) {
-    console.error("Error during login:", error.message);
-    setErr('gagal autentication')
-    setTimeout(() => {
-      setErr('')
-    }, 3000);
-    setVerify(false)
-  }
 };
 
 
@@ -272,7 +270,7 @@ const loginUser = async (email, password) => {
                   <input type="text" className="p-2 w-full rounded-lg outline-none  text-black" name="text"  value={email} onChange={(e) => setEmail(e.target.value)}/>
                   <label>password</label>
                   <input type="password" className="p-2 w-full rounded-lg outline-none  text-black" name="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                  <button onClick={() =>  loginUser(email, password)} className="bg-green-500 w-full p-2 rounded-lg my-5 border">Masuk</button>
+                  <button onClick={() =>  login(email, password)} className="bg-green-500 w-full p-2 rounded-lg my-5 border">Masuk</button>
                   <p className="text-green-700 text-xs">{err ? err : ''}</p>
                 </div>
               </div>

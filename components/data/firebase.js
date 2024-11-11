@@ -4,9 +4,9 @@ import { initializeApp } from "firebase/app";
 import { getDownloadURL, getStorage, listAll, ref as storageRef, uploadBytes  } from 'firebase/storage'
 import { getDatabase, child, get, ref, set, push } from 'firebase/database'
 // import { collection, doc, getDocs, getFirestore } from 'firebase/firestore'
-import { getAuth } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-import { signInWithEmailAndPassword } from "firebase/auth";
+// import { signInWithEmailAndPassword } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -163,6 +163,18 @@ const addDataToFirebase = async (id, formData) => {
       throw new Error("File upload failed.");
     }
   };
+  const loginUser = async (email, password) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      console.log("User logged in:", user);
+      // setVerify(true)
+      return true
+  
+    } catch (error) {
+      console.error("Error during login:", error.message);
+     
+    }
+  };
 
-
-export { storage, database, fetchGalery, fetchBg, fetchData, addDataToFirebase, auth}
+export { storage, database, fetchGalery, fetchBg, fetchData, addDataToFirebase, loginUser}
