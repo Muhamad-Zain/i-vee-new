@@ -22,8 +22,8 @@ export const metadata = {
     images: [
       {
         url: "https://i-vee-new.vercel.app/img/wedding.png",
-        width: 1200,
-        height: 630,
+        width: 600,
+        height: 315,
         alt: "Banner Undangan Pernikahan",
       },
     ],
