@@ -1,9 +1,12 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+// import { getAnalytics } from "firebase/analytics";
 import { getDownloadURL, getStorage, listAll, ref as storageRef, uploadBytes  } from 'firebase/storage'
 import { getDatabase, child, get, ref, set, push } from 'firebase/database'
-import { collection, doc, getDocs, getFirestore } from 'firebase/firestore'
+// import { collection, doc, getDocs, getFirestore } from 'firebase/firestore'
+import { getAuth } from "firebase/auth";
+
+import { signInWithEmailAndPassword } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -25,6 +28,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app)
 const storage = getStorage(app)
+const auth = getAuth(app)
 
 // fetch Data firebase
 
@@ -121,18 +125,6 @@ const addDataToFirebase = async (id, formData) => {
       // Meng-upload file ke Firebase Storage
       await uploadBytes(fileRef, file);
   
-      // Mendapatkan URL file setelah di-upload
-      // const downloadURL = await getDownloadURL(fileRef);
-  
-      // // Menyimpan metadata file di Firebase Realtime Database
-      // const dbPathRef = ref(database, `images/${id}/${category}`);
-      // const newImageRef = push(dbPathRef);
-      // await set(newImageRef, {
-      //   name: file.name,
-      //   url: downloadURL,
-      // });
-  
-      // Mengembalikan data file yang di-upload
       return { category};
     } catch (error) {
       console.error("Error uploading file:", error);
@@ -146,23 +138,6 @@ const addDataToFirebase = async (id, formData) => {
     //   const newId = uuidv4();  // Membuat ID unik untuk setiap upload
   
       const uploadedFiles = [];
-  
-      // Meng-upload file dari setiap kategori
-      // for (const category of categories) {
-      //   if (files[category]) {
-      //     // Jika ada file di kategori tersebut, upload file tersebut
-      //     const uploadedFile = await uploadFileToFirebase(files[category], category, id);
-      //     uploadedFiles.push(uploadedFile);
-      //   }
-      // }
-  
-      // // Meng-upload file galeri
-      // if (files.galery && files.galery.length > 0) {
-      //   for (const file of files.galery) {
-      //     const uploadedFile = await uploadFileToFirebase(file, "gallery", id);
-      //     uploadedFiles.push(uploadedFile);
-      //   }
-      // }
       for (const category of categories) {
         if (files[category]) {
           const file = files[category];
@@ -189,4 +164,5 @@ const addDataToFirebase = async (id, formData) => {
     }
   };
 
-export { storage, database, fetchGalery, fetchBg, fetchData, addDataToFirebase}
+
+export { storage, database, fetchGalery, fetchBg, fetchData, addDataToFirebase, auth}

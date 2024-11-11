@@ -1,14 +1,16 @@
 'use client'
-import { addDataToFirebase, uploadFiles } from "@/components/data/firebase"
-import Link from "next/link";
+import { addDataToFirebase, loginUser, uploadFiles, auth } from "@/components/data/firebase"
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react"
+
+
 
 export default function AddData() {
     const [newId, setNewId] = useState('')  
     const [message, setMessage] = useState(false)
-    const [auth, setAuth ] = useState(false) 
-    const [name, setName] = useState('')
-    const [password, setPassword] = useState('')
+    // const [auth, setAuth ] = useState(false) 
+    // const [name, setName] = useState('')
+    // const [password, setPassword] = useState('')
     
     
 
@@ -73,10 +75,12 @@ export default function AddData() {
     }
   };
 
+
+  const [idUndangan, setIdUndangan] = useState('')
   const handleSubmit = async(e) => {
     e.preventDefault();
-    const id =  Date.now().toString();
-
+    const id =  idUndangan;
+    
     try {
       setMessage(true)
       await addDataToFirebase(id,data);
@@ -112,22 +116,46 @@ export default function AddData() {
 
   // console.log(name, password);
   
-  const handleAuth = () => {
-    // e.preventDefault
-    if (name === 'owner' && password === '123') {
-      setAuth(true)
-    } else {
-      alert('Autenticarion gagal')
-    }
+  // const handleAuth = () => {
+  //   // e.preventDefault
+  //   if (name === 'owner' && password === '123') {
+  //     setAuth(true)
+  //   } else {
+  //     alert('Autenticarion gagal')
+  //   }
 
+  // }
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [verify, setVerify] = useState(false)
+  console.log(email, password);
+  const [err, setErr] = useState('')
+  
+const loginUser = async (email, password) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    console.log("User logged in:", user);
+    setVerify(true)
+
+  } catch (error) {
+    console.error("Error during login:", error.message);
+    setErr('gagal autentication', error.message)
+    setTimeout(() => {
+      setErr('')
+    }, 3000);
+    setVerify(false)
   }
+};
 
 
     return(
         <section className="max-w-[400px] mb-20 m-auto">
-            {auth ? (
+            {verify ? (
               <div>
               <h3 className="text-center text-xl w-3/4 m-auto py-5 playfair">Add Data to template wedings exlusive</h3>
+              <input type="text" placeholder="Id Undangan" className="text-black outline-none p-2 ml-2 rounded-md" onChange={(e) => setIdUndangan(e.target.value)} />
+
               <form 
                   onSubmit={handleSubmit}
                   className="p-2 text-black">
@@ -238,14 +266,15 @@ export default function AddData() {
           </div>
             ): (
               <div className="w-[90%] m-auto h-screen flex justify-center items-center">
-                <form>
+                <div>
                   <h1 className=" text-center text-2xl mb-10 playfair">Autentication Owner</h1>
                   <label>username</label>
-                  <input type="text" className="p-2 w-full rounded-lg outline-none  text-black" name="text"  onChange={(e) => setName(e.target.value)}/>
+                  <input type="text" className="p-2 w-full rounded-lg outline-none  text-black" name="text"  value={email} onChange={(e) => setEmail(e.target.value)}/>
                   <label>password</label>
-                  <input type="password" className="p-2 w-full rounded-lg outline-none  text-black" name="password" onChange={(e) => setPassword(e.target.value)}/>
-                  <button onClick={handleAuth} className="bg-green-500 w-full p-2 rounded-lg my-5 border">Masuk</button>
-                </form>
+                  <input type="password" className="p-2 w-full rounded-lg outline-none  text-black" name="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                  <button onClick={() =>  loginUser(email, password)} className="bg-green-500 w-full p-2 rounded-lg my-5 border">Masuk</button>
+                  <p className="text-green-700 text-xs">{err ? err : ''}</p>
+                </div>
               </div>
             )}
         </section>
