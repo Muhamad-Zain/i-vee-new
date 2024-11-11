@@ -149,7 +149,6 @@ export default function App({id, name}) {
         </section>
     )
 }
-
 App.propTypes = {
     id: PropTypes.string,
     name: PropTypes.string
