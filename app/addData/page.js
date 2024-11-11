@@ -140,7 +140,7 @@ const loginUser = async (email, password) => {
 
   } catch (error) {
     console.error("Error during login:", error.message);
-    setErr('gagal autentication', error.message)
+    setErr('gagal autentication')
     setTimeout(() => {
       setErr('')
     }, 3000);
